@@ -1,0 +1,24 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.likco.scopeview</id>
+    <name>Scope View</name>
+    <vendor email="likdan.official@gmail.com" url="https://likdan.com">Daniil Serheyuk</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <resource-bundle>messages.MyBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="org.jetbrains.plugins.template.view.pane.ScopePaneRegistrar"/>
+
+        <applicationService
+                serviceImplementation="org.jetbrains.plugins.template.view.settings.ScopeSettings"/>
+
+        <projectConfigurable
+                parentId="tools"
+                id="org.jetbrains.plugins.template.view.settings.ScopeSettingsConfigurable"
+                key="scopeView.settings.displayName"
+                bundle="messages.MyBundle"
+                implementation="org.jetbrains.plugins.template.view.settings.ScopeSettingsConfigurable"/>
+    </extensions>
+</idea-plugin>
