@@ -1,0 +1,47 @@
+{
+  "name": "JetBrains Plugin Dev",
+  "image": "gradle:8.6-jdk17",
+
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "fwcd.kotlin",
+        "mathiasfrohlich.Kotlin",
+        "vscjava.vscode-gradle"
+      ],
+      "settings": {
+        "java.jdt.ls.java.home": "/usr/local/sdkman/candidates/java/current",
+        "kotlin.java.home": "/usr/local/sdkman/candidates/java/current"
+      }
+    }
+  },
+
+  // Pre-download Gradle wrapper and dependencies so first build is fast
+  "postCreateCommand": "gradle dependencies --no-daemon || true",
+
+  "remoteEnv": {
+    // Set these in your local .env or Codespaces secrets for plugin signing/publishing
+    "CERTIFICATE_CHAIN": "${localEnv:CERTIFICATE_CHAIN}",
+    "PRIVATE_KEY": "${localEnv:PRIVATE_KEY}",
+    "PRIVATE_KEY_PASSWORD": "${localEnv:PRIVATE_KEY_PASSWORD}",
+    "PUBLISH_TOKEN": "${localEnv:PUBLISH_TOKEN}"
+  },
+
+  "mounts": [
+    // Cache Gradle home across rebuilds — speeds up dependency resolution
+    "source=jetbrains-plugin-gradle-cache,target=/root/.gradle,type=volume"
+  ],
+
+  "forwardPorts": [],
+
+  "containerEnv": {
+    "GRADLE_OPTS": "-Dorg.gradle.daemon=false"
+  }
+}
