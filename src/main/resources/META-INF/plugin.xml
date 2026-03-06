@@ -9,16 +9,16 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <postStartupActivity implementation="org.jetbrains.plugins.template.view.pane.ScopePaneRegistrar"/>
+        <postStartupActivity implementation="com.github.likdan.pluginscopeview.view.pane.ScopePaneRegistrar"/>
 
         <applicationService
-                serviceImplementation="org.jetbrains.plugins.template.view.settings.ScopeSettings"/>
+                serviceImplementation="com.github.likdan.pluginscopeview.view.settings.ScopeSettings"/>
 
         <projectConfigurable
                 parentId="tools"
-                id="org.jetbrains.plugins.template.view.settings.ScopeSettingsConfigurable"
+                id="com.github.likdan.pluginscopeview.view.settings.ScopeSettingsConfigurable"
                 key="scopeView.settings.displayName"
                 bundle="messages.MyBundle"
-                implementation="org.jetbrains.plugins.template.view.settings.ScopeSettingsConfigurable"/>
+                implementation="com.github.likdan.pluginscopeview.view.settings.ScopeSettingsConfigurable"/>
     </extensions>
 </idea-plugin>
